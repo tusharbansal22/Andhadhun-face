@@ -14,6 +14,6 @@ def image_check(file1,file2):
     results = face_recognition.compare_faces([known_encoding], unknown_encoding)
     return results[0]
 sys.stdout.write(str(image_check(arg1,arg2)))
-sys.stdout.write('Hello, world')
+# sys.stdout.write('Hello, world')
 # sys.stdout.flush()
 print(image_check(arg1,arg2))
