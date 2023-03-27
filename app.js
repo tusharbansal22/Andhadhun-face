@@ -16,26 +16,15 @@ app.listen(3000,()=>{
       console.error(err);
     } else {
       console.log(`Image captured and saved to ${filePath}`);
+
+      const args = ['Tushar.jpg', 'my-image.jpg'];
+      const pythonProcess = spawn('python3', ['my_script.py', ...args]);
+      pythonProcess.stdout.on('data', (data) => {
+        console.log(`Python function output: ${data}`);
+      });
+      pythonProcess.on('close', (code) => {
+        console.log(`Python process exited with code ${code}`);
+      });
     }
   });
-
-  // let options = {
-  //   args: ['Tushar.jpg', 'my-image.jpg']
-  // };
-
-  const args = ['Tushar.jpg', 'my-image.jpg'];
-  const pythonProcess = spawn('python3', ['my_script.py', ...args]);
-  let output = '';
-  pythonProcess.stdout.on('data', (data) => {
-    output += data.toString();
-  });
-  pythonProcess.on('close', (code) => {
-    console.log(`Python process exited with code ${code}`);
-    console.log(`Python function output: ${output}`);
-  });
-  // PythonShell.run('script.py', options, function (err, results) {
-  //   if (err) throw err;
-  //   console.log('results:', results);
-
-  // });
 });
